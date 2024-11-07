@@ -21,12 +21,23 @@ void main() {
   // print(queue);
 
   // RING BUFFER
-  final queue = QueueRingBuffer<int>(4);
-  queue.enqueue(456);
-  queue.enqueue(12);
-  queue.enqueue(345);
+  // final queue = QueueRingBuffer<int>(4);
+  // queue.enqueue(456);
   // queue.enqueue(12);
-  print(queue);
+  // queue.enqueue(345);
+  // queue.enqueue(12);
+
+  // DOUBLE STACK
+  final queue = QueueStack<String>();
+  queue.enqueue("Chuks");
+  queue.enqueue("Adaoma");
+  queue.enqueue("Badmus");
+  queue.enqueue("Adaoma");
+  print(queue._leftStack);
+  print(queue._rightStack);
+  queue.dequeue();
+  print(queue._rightStack);
+  print(queue._leftStack);
 }
 
 /* 
@@ -52,7 +63,7 @@ void main() {
     By contrast, QueueList does bulk allocation, which is faster.
 
     2. To eliminate allocation overhead and maintain O(1) dequeues, use Ring Buffer
-    
+
     3. RING BUFFER: despite having space complexity of O(n) just like a linkedList when adding a new elemnt,
     it is not as costly as linkedList since it maintains a constant space: doesn’t require new memory allocation internally when enqueuing new elements.
 
@@ -144,4 +155,42 @@ class QueueRingBuffer<E> implements Queue<E> {
 
   @override
   String toString() => _ringBuffer.toString();
+}
+
+/// QUEUE THROUGH DOUBLE-STACK
+///
+class QueueStack<E> implements Queue<E> {
+  final _leftStack = <E>[];
+  final _rightStack = <E>[];
+
+  @override
+  bool enqueue(E element) {
+    _rightStack.add(element);
+    return true;
+  }
+
+  @override
+  E? dequeue() {
+    if (_leftStack.isEmpty) {
+      _leftStack.addAll(_rightStack.reversed);
+      _rightStack.clear();
+    }
+    if (_leftStack.isEmpty) return null;
+    return _leftStack.removeLast();
+  }
+
+  @override
+  bool get isEmpty => _leftStack.isEmpty && _rightStack.isEmpty;
+
+  @override
+  E? get peek => _leftStack.isNotEmpty ? _leftStack.last : _rightStack.first;
+
+  @override
+  String toString() {
+    final combined = [
+      ..._leftStack.reversed,
+      ..._rightStack,
+    ].join(', ');
+    return '[$combined]';
+  }
 }
