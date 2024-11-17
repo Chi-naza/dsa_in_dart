@@ -2,7 +2,7 @@ import 'package:dsa_in_dart/trees/binary_trees.dart';
 
 void main() {
   var tree = BinarySearchTree<int>();
-  var nTree = BinaryNode("value");
+
   tree.insert(3);
   tree.insert(10);
   tree.insert(4);
