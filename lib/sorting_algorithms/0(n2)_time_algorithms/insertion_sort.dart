@@ -4,7 +4,7 @@ void main() {
   var myList = [7, 5, 100, 3, 8, 2, 13];
   print("Main List $myList");
   insertionSort<int>(myList);
-  print("Main List $myList");
+  print("Sorted List $myList");
 }
 
 /* 

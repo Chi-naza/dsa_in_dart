@@ -4,7 +4,7 @@ void main() {
   var myList = [7, 5, 11, 3, 7, 12, 90, 1];
   print("Main List $myList");
   selectionSort(myList);
-  print("Main List $myList");
+  print("Sorted List $myList");
 }
 
 /* 
