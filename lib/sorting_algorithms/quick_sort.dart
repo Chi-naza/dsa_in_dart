@@ -14,7 +14,7 @@ void main() {
 
   final list = [8, 2, 2, 8, 9, 5, 9, 2, 8];
   quicksortDutchFlag(list, 0, list.length - 1);
-  print(list);
+  print("Quick Sort Dutch Flag $list");
 }
 
 /* 
