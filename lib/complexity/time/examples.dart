@@ -3,6 +3,7 @@ void main() {
 
   const numbers = [1, 3, 56, 66, 68, 80, 99, 105, 450];
   const names = ["Chinaza", "John", "Ekene", "Adam", "Hosea", "Joseph"];
+  print("$numbers \n$names");
 }
 
 // Constant Time O(1)
